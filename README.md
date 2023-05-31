@@ -1,8 +1,37 @@
 # Chief Media x Mint Measure Scripts
 Collaborative data munging work between Chief Media and Mint Measure.
 
-## aggregate_post_logs.py
+## aggregate_post_logs.py 
+
 ### Critical Info
+
+#### Compatible Stations and Markets
+Currently this script supports post logs from the following stations and
+markets. If a post-log file is from a new station or market, the station and 
+market lookup dictionaries in the script must be updated. Any formatting changes
+must be added, instructions for which are in this documentation. 
+
+##### Stations (Station code in filename)
+KATU
+KBNZ
+KBOI
+KHQ
+KOHD
+KOIN
+KPTV
+KTVM
+KTVZ
+KXLF
+
+##### Markets (Geographical name in filename)
+Pierce
+Spokane
+Thurston
+
+##### Markets (Nielsen DMA name in filename)
+None
+
+#### File Formatting/Cleaning
 All input files MUST contain only the data. This means the following may require
 a couple of simple manual edits:
 1. Header row must be the first row in the file. 
@@ -32,6 +61,7 @@ the above criteria are met.
 ### Running the script
 1. Install requirements.txt (currently in conda format).
 2. Ensure that the /data folder exists in the same folder as the script. 
+3. Place all post log files 
 3. Run file. 
 
 ### Editing the script for new data
