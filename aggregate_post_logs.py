@@ -319,8 +319,4 @@ output_folder = './output_data'
 output_filename = 'aggregated_spots_data.csv'
 output_filepath = os.path.join(output_folder, output_filename)
 output_data.to_csv(output_filepath, index=False)
-
-
-
-
-
+print(f'Output file spot count is {len(output_data)}')
