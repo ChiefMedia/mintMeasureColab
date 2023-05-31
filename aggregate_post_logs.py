@@ -300,6 +300,13 @@ output_data = pd.concat([all_stations_dfs, all_markets_dfs])
 print('Output data sample:')
 print(all_markets_dfs.sample(10))
 
+# Write file to output folder
+# Will write to the output_data folder in the root of this repo
+output_folder = './output_data'
+output_filename = 'aggregated_spots_data.csv'
+output_filepath = os.path.join(output_folder, output_filename)
+output_data.to_csv(output_filepath, index=False)
+
 
 
 
