@@ -34,15 +34,16 @@ None
 #### File Formatting/Cleaning
 All input files MUST contain only the data. This means the following may require
 a couple of simple manual edits:
-1. Header row must be the first row in the file. 
-2. All "pretty" formatting must be removed, i.e. file must contain only the 
+1. All files must be in .xlsx format.
+2. Header row must be the first row in the file. 
+3. All "pretty" formatting must be removed, i.e. file must contain only the 
 data, with no whitespace columns on any side. 
-3. POTENTIAL BUG: All national media must have a dma_code field value of '999'. 
+4. POTENTIAL BUG: All national media must have a dma_code field value of '999'. 
 In the current iteration of this script, no spots are national so this isn't 
 accounted for anywhere. Should this become the case, this will need to be 
 handled in under the appropriate data augmentation section (probably in the 
 market-level files vs the individual station files).  
-3. POTENTIAL BUG: For market (multiple station) files, the format is a mess. To 
+5. POTENTIAL BUG: For market (multiple station) files, the format is a mess. To 
 make the cleaning work for the most part, the length column ends up getting 
 removed. As such, the length is added with a hard-coded value of 30, having 
 looked at the files and verified only 30s exist. If this were to change, this 

@@ -1,5 +1,7 @@
 """
-Script to create a single dataset of spots from multiple post-logs. 
+POST LOG AGGREGATION SCRIPT
+
+Script to create a single dataset of spots from multiple post-log Excel files. 
 
 Data is read from /data in the folder this script runs from. 
 
@@ -21,6 +23,12 @@ Buy Markets:
 Pierce, WA (Seattle Nielsen DMA)
 Thurston, WA (Seattle Nielsen DMA)
 Spokane, WA (Spokane Nielsen DMA)
+
+See README for further documentation and instructions. 
+
+Contributors:
+Anthony Baum @ Chief Media
+
 """
 
 # Module imports
