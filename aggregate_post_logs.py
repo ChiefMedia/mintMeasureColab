@@ -35,9 +35,14 @@ Anthony Baum @ Chief Media
 import os
 import pandas as pd
 import numpy as np
+import warnings
 
 pd.options.mode.chained_assignment = None
-
+# We're ignoring warnings as Pandas throws a deprecation warning when 
+#   pd.to_datetime is passed with the infer_datetime_format parameter.
+# In our case, we need that dynamic inference of the datetime format since each
+# post-log file is coming through with something different.
+warnings.filterwarnings("ignore", category=UserWarning)
 
 # First we can get the filenames from the data folder
 # We can split the files into two distinct categories:
