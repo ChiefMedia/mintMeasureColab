@@ -12,43 +12,44 @@ market lookup dictionaries in the script must be updated. Any formatting changes
 must be added, instructions for which are in this documentation. 
 
 ##### Stations (Station code in filename)
-KATU
-KBNZ
-KBOI
-KHQ
-KOHD
-KOIN
-KPTV
-KTVM
-KTVZ
-KXLF
+KATU  
+KBNZ  
+KBOI  
+KHQ  
+KOHD  
+KOIN  
+KPTV  
+KTVM  
+KTVZ  
+KXLF  
 
 ##### Markets (Geographical name in filename)
-Pierce
-Spokane
-Thurston
+Pierce  
+Spokane  
+Thurston  
 
 ##### Markets (Nielsen DMA name in filename)
-None
+None  
 
 #### File Formatting/Cleaning
 All input files MUST contain only the data. This means the following may require
 a couple of simple manual edits:
 1. Header row must be the first row in the file. 
-2. All "pretty" formatting must be removed, i.e. file must contain only the data,
-with no whitespace columns on any side. 
+2. All "pretty" formatting must be removed, i.e. file must contain only the 
+data, with no whitespace columns on any side. 
 3. POTENTIAL BUG: All national media must have a dma_code field value of '999'. 
 In the current iteration of this script, no spots are national so this isn't 
 accounted for anywhere. Should this become the case, this will need to be 
 handled in under the appropriate data augmentation section (probably in the 
 market-level files vs the individual station files).  
-3. POTENTIAL BUG: For market (multiple station) files, the format is a mess. To make the
-cleaning work for the most part, the length column ends up getting removed. As
-such, the length is added with a hard-coded value of 30, having looked at the 
-files and verified only 30s exist. If this were to change, this will require a 
-bug fix. 
+3. POTENTIAL BUG: For market (multiple station) files, the format is a mess. To 
+make the cleaning work for the most part, the length column ends up getting 
+removed. As such, the length is added with a hard-coded value of 30, having 
+looked at the files and verified only 30s exist. If this were to change, this 
+will require a bug fix. 
 
-Points 1 and 2 above apply to all post-log files, single station or multiple station. 
+Points 1 and 2 above apply to all post-log files, single station or multiple 
+station. 
 
 The script should handle all other data cleaning and formatting including 
 dropping subtotal and total rows. Totals and subtotals should, however, be a 
