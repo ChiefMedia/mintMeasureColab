@@ -16,6 +16,11 @@ KPTV/820
 KTVM/762
 KTVZ/821
 KXLF/754
+
+Buy Markets:
+Pierce, WA (Seattle Nielsen DMA)
+Thurston, WA (Seattle Nielsen DMA)
+Spokane, WA (Spokane Nielsen DMA)
 """
 
 # Module imports

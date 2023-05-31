@@ -52,5 +52,13 @@ This section cleans up the data to remove punctuation, standardize data types,
 etc. 
 
 #### FILE AUGMENTATIONS
-Any additions necessary. Currently this is only adding the station name. 
+Any additions necessary. Currently this includes adding datetime fields to all
+files. 
+
+For the individual stations files, station is added by parsing the file name. 
+
+DMA codes are added to both files, both using hard-coded lookup dictionaries in
+their respective sections.
+
+
 
