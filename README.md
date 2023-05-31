@@ -1,6 +1,28 @@
 # Chief Media x Mint Measure Scripts
 Collaborative data munging work between Chief Media and Mint Measure.
 
+## Repo Installation
+This was originally written in a Conda environment, however the requirements.txt
+file is formatted for installation using pip. Anaconda uses an Intel optimized
+version of Numpy, so you'll note in the requirements that three packages are 
+pulling from a pypi url instead of pulling directly. Those three packages will
+add several files to your repo root folder. Those files are included in
+.gitignore, and you can see which ones exactly are ignored at the top of the 
+gitignore file.   
+
+1. Clone repo. 
+2. Create a virtual environment using the cloned repo root folder. Terminal 
+commands to replicate.
+
+git clone https://github.com/ChiefMedia/mintMeasureColab  
+python -m venv mintMeasureColab  
+pip install -r requirements.txt  
+
+Do not run requirements installation outside of a virtual environment or
+contained. 
+
+## Scripts  
+
 ## aggregate_post_logs.py 
 
 ### Critical Info
@@ -61,9 +83,8 @@ adding to or modifying the script to address the changes should be trivial if
 the above criteria are met. 
 
 ### Running the script
-1. Install requirements.txt (currently in conda format).
-2. Ensure that the /data folder exists in the same folder as the script. 
-3. Place all post log files 
+1. Ensure that the /data folder exists in the same folder as the script. 
+2. Place all post log files 
 3. Run file. 
 
 ### Editing the script for new data
