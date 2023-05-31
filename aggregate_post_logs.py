@@ -187,7 +187,7 @@ for i, (station, df) in enumerate(zip([f.split('_')[1] for f in station_files], 
 
 
 ### CREATE AGGREGATED DATASET OF STATIONS
-keep_cols = ['station', 'datetime', 'dma_code', 'rate', 'length']
+keep_cols = ['datetime', 'station', 'dma_code', 'rate', 'length']
 all_stations_dfs = pd.concat([df[keep_cols] for df in station_files_dfs])
 print('Aggregated all stations data sample:')
 print(all_stations_dfs.sample((5)), '\n')
