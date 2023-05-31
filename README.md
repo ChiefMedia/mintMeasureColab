@@ -16,6 +16,8 @@ commands to replicate.
 
 git clone https://github.com/ChiefMedia/mintMeasureColab  
 python -m venv mintMeasureColab  
+cd mintMeasureColab
+source bin/activate
 pip install -r requirements.txt  
 
 Do not run requirements installation outside of a virtual environment or
