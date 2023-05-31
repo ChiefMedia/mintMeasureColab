@@ -5,6 +5,8 @@ lib64
 pyvenv.cfg
 third-party-programs.txt
 
+# Ignore output data files
+output_data/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
