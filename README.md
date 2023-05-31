@@ -25,7 +25,7 @@ adding to or modifying the script to address the changes should be trivial if
 the above criteria are met. 
 
 ### Running the script
-1. Ensure to install requirements.txt. 
+1. Install requirements.txt (currently in conda format).
 2. Ensure that the /data folder exists in the same folder as the script. 
 3. Run file. 
 
