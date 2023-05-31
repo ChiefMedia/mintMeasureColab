@@ -1,3 +1,11 @@
+# Files added by pypi/simple installations
+licensing/
+include/
+lib64
+pyvenv.cfg
+third-party-programs.txt
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -8,6 +16,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+bin/
 build/
 develop-eggs/
 dist/
