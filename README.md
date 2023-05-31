@@ -12,7 +12,7 @@ gitignore file.
 
 1. Clone repo. 
 2. Create a virtual environment using the cloned repo root folder. Terminal 
-commands to replicate.
+commands to replicate:
 
 git clone https://github.com/ChiefMedia/mintMeasureColab  
 python -m venv mintMeasureColab  
