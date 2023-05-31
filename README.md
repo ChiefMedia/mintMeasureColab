@@ -1,5 +1,5 @@
-# mintMeasureColab
-Collaborative work between Chief Media and Mint Measure.
+# Chief Media x Mint Measure Scripts
+Collaborative data munging work between Chief Media and Mint Measure.
 
 ## aggregate_post_logs.py
 ### Critical Info
