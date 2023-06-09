@@ -2,6 +2,8 @@
 Collaborative data munging work between Chief Media and Mint Measure.
 
 ## Repo Installation
+Python version 3.8.x >= 3.10.x
+
 This was originally written in a Conda environment, however the requirements.txt
 file is formatted for installation using pip. Anaconda uses an Intel optimized
 version of Numpy, so you'll note in the requirements that three packages are 
