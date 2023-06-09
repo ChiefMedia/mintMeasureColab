@@ -37,6 +37,8 @@ import pandas as pd
 import numpy as np
 import warnings
 
+WEEK_OF = '20230515'
+
 pd.options.mode.chained_assignment = None
 # We're ignoring warnings as Pandas throws a deprecation warning when 
 #   pd.to_datetime is passed with the infer_datetime_format parameter.
@@ -49,7 +51,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 #   Single station - post log is for one station only, denoted "K___"
 #   Multiple station - contains multiple stations' data for one market
 all_data_filenames = []
-for (dirpath, direnames, filenames) in os.walk('./data'):
+for (dirpath, direnames, filenames) in os.walk(f'./post_log_data/{WEEK_OF}/'):
     all_data_filenames.extend(filenames)
     break
 
@@ -75,7 +77,7 @@ market_files = [f for f in all_data_filenames if f not in station_files]
 # We'll start with the station files
 
 # Create a pandas dataframe for each file in station_files then print the data
-station_files_dfs = [pd.read_excel(os.path.join('./data', f)) for f in station_files]
+station_files_dfs = [pd.read_excel(os.path.join(f'./post_log_data/{WEEK_OF}/', f)) for f in station_files]
 for f, df in zip(station_files, station_files_dfs):
     print(f)
     print(df.info(), '\n')
@@ -100,7 +102,7 @@ for i, df in enumerate(station_files_dfs):
     cleaned_df.columns = ['aired_time' if col in ['air_time', 'time', 'actual_time_when_spot_aired']  else col for col in cleaned_df.columns]
     # Dates
     # Most files have a single date column
-    cleaned_df.columns = ['aired_date' if col in ['air_date', 'date']  else col for col in cleaned_df.columns]
+    cleaned_df.columns = ['aired_date' if col in ['air_date', 'date', 'broadcast_date']  else col for col in cleaned_df.columns]
     # One file has m, d, y split out
     if 'm' in cleaned_df.columns:
         cleaned_df['aired_date'] = cleaned_df.apply(lambda row: str(row.y) + '-' + str(row.m) + '-' + str(row.d), axis=1)
@@ -123,6 +125,8 @@ for i, df in enumerate(station_files_dfs):
 # We'll ensure those are correct
 
 for i, (f, df) in enumerate(zip(station_files, station_files_dfs)):
+    print(f'Cleaning file: {f}')
+
     cleaned_df = df.copy()
 
     # Drop nulls based on the columns we're using
@@ -181,12 +185,14 @@ for i, (station, df) in enumerate(zip([f.split('_')[1] for f in station_files], 
     # Add the Nielsen DMA code
     station_to_dma_lookup = {
         'KATU':820,
+        'KAYU':881,
         'KBNZ':821,
         'KBOI':757,
         'KHQ':881,
         'KOHD':821,
         'KOIN':820,
         'KPTV':820,
+        'KREM':881,
         'KTVM':762,
         'KTVZ':821,
         'KXLF':754
@@ -212,7 +218,9 @@ print(all_stations_dfs.sample((5)), '\n')
 # As of now, all market files are in the same format so we can apply all
 #   cleaning to each market file
 
-market_file_dfs = [pd.read_excel(os.path.join('./data', f)) for f in market_files]
+market_file_dfs = [pd.read_excel(os.path.join(f'./post_log_data/{WEEK_OF}/', f)) for f in market_files]
+print('Market data files identified:')
+print(market_files)
 
 ### FILE HEADER CLEANING
 for i, df in enumerate(market_file_dfs):
@@ -298,25 +306,40 @@ for i, (f, df) in enumerate(zip(market_files, market_file_dfs)):
 
     market_file_dfs[i] = cleaned_df
 
+    print(f'{f} market file spot count: {len(cleaned_df)}')
+
 
 ### AGGREGATE MARKET FILES
 # keep_cols was defined under the station files editing
 # Referencing that here so any change there is reflected here
 # If an edit is missed in the market edits, this should mean an error is thrown
-all_markets_dfs = pd.concat([df[keep_cols] for df in market_file_dfs])
-print('Aggregated all stations data sample:')
-print(all_markets_dfs.sample(5), '\n')
+if len(market_file_dfs) > 0:
+    all_markets_dfs = pd.concat([df[keep_cols] for df in market_file_dfs])
+    print('Aggregated all stations data sample:')
+    print(all_markets_dfs.sample(5), '\n')
+else:
+    # Set all_markets_dfs to empty dataframe
+    all_markets_dfs = pd.DataFrame()
 
 
 ### UNION STATIONS AND MARKETS FILES
-output_data = pd.concat([all_stations_dfs, all_markets_dfs])
+# Concat if both sets of station type exists
+if len(all_stations_dfs) > 0 and len(all_markets_dfs) > 0:
+    output_data = pd.concat([all_stations_dfs, all_markets_dfs])
+elif len(all_stations_dfs) > 0:
+    output_data = all_stations_dfs
+elif len(all_markets_dfs) > 0:
+    output_data = all_markets_dfs
+
+
+output_data = output_data.reset_index(drop=True).reset_index().rename(columns={'index':'spot_id'})
 print('Output data sample:')
-print(all_markets_dfs.sample(10))
+print(output_data.sample(10))
 
 # Write file to output folder
 # Will write to the output_data folder in the root of this repo
-output_folder = './output_data'
-output_filename = 'aggregated_spots_data.csv'
+output_folder = './spots_aggregation_output'
+output_filename = f'aggregated_spots_data_{WEEK_OF}.csv'
 output_filepath = os.path.join(output_folder, output_filename)
 output_data.to_csv(output_filepath, index=False)
 print(f'Output file spot count is {len(output_data)}')
